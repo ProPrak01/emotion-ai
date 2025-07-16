@@ -5,9 +5,9 @@ const config = {
         WS_URL: 'ws://localhost:8000/ws'
     },
     production: {
-        // These will be replaced with your actual deployed backend URLs
-        API_URL: process.env.REACT_APP_API_URL || 'https://emotion-ai-api.onrender.com',
-        WS_URL: process.env.REACT_APP_WS_URL || 'wss://emotion-ai-api.onrender.com/ws'
+        // Update these URLs after deploying your backend
+        API_URL: 'https://emotion-ai-api.onrender.com',
+        WS_URL: 'wss://emotion-ai-api.onrender.com/ws'
     }
 };
 
