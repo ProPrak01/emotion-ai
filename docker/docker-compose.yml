@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  emotion-music-generator:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: emotion-music-generator:latest
+    container_name: emotion-music-app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../backend/models:/app/backend/models
+      - ../backend/logs:/app/backend/logs
+      - music-data:/app/frontend/assets/music
+    environment:
+      - PYTHONUNBUFFERED=1
+      - TF_CPP_MIN_LOG_LEVEL=2
+      - DEBUG=true
+    restart: unless-stopped
+    networks:
+      - emotion-net
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 1G
+        reservations:
+          cpus: '1'
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  nginx:
+    image: nginx:alpine
+    container_name: emotion-music-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../frontend:/usr/share/nginx/html:ro
+    depends_on:
+      - emotion-music-generator
+    networks:
+      - emotion-net
+    restart: unless-stopped
+
+volumes:
+  music-data:
+    driver: local
+
+networks:
+  emotion-net:
+    driver: bridge

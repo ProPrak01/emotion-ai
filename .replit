@@ -1,0 +1,25 @@
+run = "cd backend && pip install -r requirements.txt && python app.py"
+language = "python3"
+
+[env]
+PYTHON_VERSION = "3.9"
+HOST = "0.0.0.0"
+PORT = "8000"
+
+[nix]
+channel = "stable-22_11"
+
+[packager]
+language = "python3"
+
+[packager.features]
+packageSearch = true
+guessImports = true
+
+[[ports]]
+localPort = 8000
+externalPort = 80
+
+[deployment]
+run = ["sh", "-c", "cd backend && pip install -r requirements.txt && python app.py"]
+deploymentTarget = "cloudrun"

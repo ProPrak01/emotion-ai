@@ -1,0 +1,25 @@
+# Netlify configuration file
+
+[build]
+  publish = "frontend"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://emotion-music-api.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/ws"
+  to = "https://emotion-music-api.onrender.com/ws"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "no-referrer"
+    Permissions-Policy = "camera=(*), microphone=(), geolocation=(), interest-cohort=()"

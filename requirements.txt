@@ -1,0 +1,2 @@
+# Root requirements file for deployment
+-r backend/requirements.txt

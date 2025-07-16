@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: emotion-music-api
+    runtime: python
+    buildCommand: "cd backend && pip install -r requirements.txt"
+    startCommand: "cd backend && uvicorn app:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.9"
+      - key: HOST
+        value: "0.0.0.0"
+      - key: DEBUG
+        value: "false"
+      - key: EMOTION_DETECTION_MODEL
+        value: "fer"
+      - key: CONFIDENCE_THRESHOLD
+        value: "0.5"
+      - key: EMOTION_SMOOTHING_FRAMES
+        value: "5"
+      - key: MAX_FACES
+        value: "5"
+      - key: DETECTION_FPS
+        value: "15"
+      - key: MUSIC_FADE_DURATION
+        value: "2.0"
+      - key: DEFAULT_MUSIC_STYLE
+        value: "ambient"
+      - key: MAX_MEMORY_MB
+        value: "512"
+      - key: MAX_CPU_PERCENT
+        value: "50"
+    healthCheckPath: /health
+    autoDeploy: false

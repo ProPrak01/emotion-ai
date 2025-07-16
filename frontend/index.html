@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Music Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="config.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Emotion Music Generator</h1>
+            <p class="subtitle">Real-time emotion detection and adaptive music generation</p>
+        </header>
+
+        <main>
+            <!-- Webcam Section -->
+            <section class="webcam-section">
+                <div class="video-container">
+                    <video id="webcam" autoplay playsinline></video>
+                    <canvas id="overlay-canvas"></canvas>
+                    <div class="emotion-overlay">
+                        <div class="current-emotion">
+                            <span class="emotion-label">Current Emotion:</span>
+                            <span id="dominant-emotion" class="emotion-value">Neutral</span>
+                            <span id="confidence" class="confidence">0%</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="webcam-controls">
+                    <button id="start-btn" class="btn btn-primary">Start Detection</button>
+                    <button id="stop-btn" class="btn btn-secondary" disabled>Stop Detection</button>
+                    <button id="calibrate-btn" class="btn btn-outline">Calibrate</button>
+                </div>
+            </section>
+
+            <!-- Emotion Visualization -->
+            <section class="visualization-section">
+                <div class="chart-container">
+                    <h3>Emotion Levels</h3>
+                    <canvas id="emotion-chart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>Emotion History</h3>
+                    <canvas id="history-chart"></canvas>
+                </div>
+            </section>
+
+            <!-- Music Controls -->
+            <section class="music-section">
+                <h3>Music Controls</h3>
+                <div class="music-controls">
+                    <div class="control-group">
+                        <label for="volume-slider">Volume</label>
+                        <input type="range" id="volume-slider" min="0" max="100" value="60">
+                        <span id="volume-value">60%</span>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="style-select">Music Style</label>
+                        <select id="style-select">
+                            <option value="ambient">Ambient</option>
+                            <option value="electronic">Electronic</option>
+                            <option value="classical">Classical</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label for="manual-slider">Manual Override</label>
+                        <input type="range" id="manual-slider" min="0" max="100" value="0">
+                        <span id="manual-value">0%</span>
+                    </div>
+                </div>
+
+                <!-- Music Visualizer -->
+                <div class="music-visualizer">
+                    <canvas id="audio-visualizer"></canvas>
+                    <div class="music-info">
+                        <span class="music-emotion" id="music-emotion">Neutral</span>
+                        <div class="music-params">
+                            <span>Tempo: <span id="tempo-value">1.0x</span></span>
+                            <span>Reverb: <span id="reverb-value">30%</span></span>
+                            <span>Brightness: <span id="brightness-value">50%</span></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <h3>Session Statistics</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-detections">0</div>
+                        <div class="stat-label">Total Detections</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="dominant-mood">Neutral</div>
+                        <div class="stat-label">Dominant Mood</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="session-time">00:00</div>
+                        <div class="stat-label">Session Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="fps-counter">0 FPS</div>
+                        <div class="stat-label">Detection Rate</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Created with d for emotion-driven experiences</p>
+        </footer>
+    </div>
+
+    <!-- Particle effects container -->
+    <div id="particles"></div>
+
+    <!-- Error/Info Messages -->
+    <div id="message-container"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
