@@ -18,7 +18,7 @@ import os
 from contextlib import asynccontextmanager
 
 # Use minimal imports for memory efficiency
-from emotion_detector import EmotionDetector
+from emotion_detector_simple import EmotionDetector
 from config import settings
 
 # Configure minimal logging

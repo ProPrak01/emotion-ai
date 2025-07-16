@@ -13,7 +13,7 @@ numpy==1.24.3
 pillow==10.1.0
 
 # Emotion detection
-fer==22.5.0
+# fer==22.5.0  # Removed - using simplified detector for deployment
 
 # Settings
 python-dotenv==1.0.0
