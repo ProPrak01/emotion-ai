@@ -1,0 +1,2 @@
+# Simplified requirements for Render deployment
+-r backend/requirements_lite.txt
